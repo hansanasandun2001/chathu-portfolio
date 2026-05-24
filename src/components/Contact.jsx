@@ -8,7 +8,7 @@ const socials = [
     icon: FaFacebookF,
   },
   {
-    label: "Facebook (Font Page)",
+    label: "Facebook (Fan Page)",
     href: "https://www.facebook.com/profile.php?id=61589932408174",
     icon: FaFacebookF,
   },
@@ -35,7 +35,7 @@ function Contact() {
           <p>
             <strong>Permanent Address:</strong> Dankubura, Meehitiya, Malwala, Ratnapura
           </p>
-           <p>
+          <p>
             <strong>Location:</strong> Kelaniya, Western Province, Sri Lanka
           </p>
           <p>
