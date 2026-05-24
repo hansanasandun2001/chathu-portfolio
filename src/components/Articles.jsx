@@ -9,6 +9,9 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Section from "./Section";
 
+const baseUrl = import.meta.env.BASE_URL || "/";
+const withBase = (path) => `${baseUrl}${path.replace(/^\/+/, "")}`;
+
 const articles = [
   {
     id: 1,
@@ -16,7 +19,7 @@ const articles = [
     description:
       "Conducted interviews with prominent specialist doctors in Sri Lanka and wrote medical articles for various newspapers.",
     photos: Array.from({ length: 9 }, (_, index) =>
-      `/chathu-portfolio/articles/a1_${index + 1}.jpg`
+      withBase(`articles/a1_${index + 1}.jpg`)
     ),
   },
   {
@@ -25,7 +28,7 @@ const articles = [
     description:
       "Explored various travel destinations in Sri Lanka and wrote travel articles for various newspapers.",
     photos: Array.from({ length: 7 }, (_, index) =>
-      `/chathu-portfolio/articles/a2_${index + 1}.jpg`
+      withBase(`articles/a2_${index + 1}.jpg`)
     ),
   },
   {
@@ -34,7 +37,7 @@ const articles = [
     description:
       "Conducted interviews with venerable Buddhist monks and wrote newspaper articles regarding Buddhism.",
     photos: Array.from({ length: 7 }, (_, index) =>
-      `/chathu-portfolio/articles/a3_${index + 1}.jpg`
+      withBase(`articles/a3_${index + 1}.jpg`)
     ),
   },
   {
@@ -42,14 +45,14 @@ const articles = [
     title: "Articles on Beauty",
     description: "Wrote newspaper articles regarding beauticians and beauty culture.",
     photos: Array.from({ length: 5 }, (_, index) =>
-      `/chathu-portfolio/articles/a4_${index + 1}.jpg`
+      withBase(`articles/a4_${index + 1}.jpg`)
     ),
   },
   {
     id: 5,
     title: "Political Articles",
     description: "Conducted interviews with Sri Lankan politicians and wrote newspaper articles.",
-    photos: ["/chathu-portfolio/articles/a5_1.jpg"],
+    photos: [withBase("articles/a5_1.jpg")],
   },
   {
     id: 6,
@@ -57,7 +60,7 @@ const articles = [
     description:
       "Wrote various types of newspaper articles from diverse perspectives regarding different fields.",
     photos: Array.from({ length: 9 }, (_, index) =>
-      `/chathu-portfolio/articles/a6_${index + 1}.jpg`
+      withBase(`articles/a6_${index + 1}.jpg`)
     ),
   },
 ];
@@ -82,15 +85,16 @@ const cardVariants = {
 function ArticleCard({ item }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const hasMultiplePhotos = item.photos.length > 1;
 
   return (
     <motion.article className="highlight-card" variants={cardVariants}>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 3000 }}
-        loop={true}
+        navigation={hasMultiplePhotos}
+        pagination={hasMultiplePhotos ? { clickable: true } : false}
+        autoplay={hasMultiplePhotos ? { delay: 3000 } : false}
+        loop={hasMultiplePhotos}
         style={{ width: "100%", height: "auto", borderRadius: "8px" }}
       >
         {item.photos.map((photo, index) => (

@@ -9,6 +9,9 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Section from "./Section";
 
+const baseUrl = import.meta.env.BASE_URL || "/";
+const withBase = (path) => `${baseUrl}${path.replace(/^\/+/, "")}`;
+
 const highlights = [
   {
     id: 1,
@@ -17,7 +20,7 @@ const highlights = [
     role: "Media Promoter & Article Writer",
     description:
       "Formulated and published strategic promotional articles in mainstream national newspapers to boost audience engagement and ticket sales for the official theater production organized by the Department of Mass Communication.",
-    photos: ["/chathu-portfolio/highlights/highlight1_1.jpg"],
+    photos: [withBase("highlights/highlight1_1.jpg")],
   },
   {
     id: 2,
@@ -27,8 +30,8 @@ const highlights = [
     description:
       "Handled the complete print media promotion by writing and publishing compelling feature articles in national newspapers to raise public awareness for the official community project organized by the Department of Mass Communication.",
     photos: [
-      "/chathu-portfolio/highlights/highlight2_1.jpg",
-      "/chathu-portfolio/highlights/highlight2_2.jpg",
+      withBase("highlights/highlight2_1.jpg"),
+      withBase("highlights/highlight2_2.jpg"),
     ],
   },
   {
@@ -39,8 +42,8 @@ const highlights = [
     description:
       "Handled the complete professional-grade typesetting, text formatting, and inner page layout for the official tribute book published in honor of Prof. Wimal Dissanayake, while actively serving as a core organizing member for the book launch ceremony.",
     photos: [
-      "/chathu-portfolio/highlights/highlight3_1.jpg",
-      "/chathu-portfolio/highlights/highlight3_2.jpg",
+      withBase("highlights/highlight3_1.jpg"),
+      withBase("highlights/highlight3_2.jpg"),
     ],
   },
   {
@@ -52,8 +55,8 @@ const highlights = [
     description:
       "Successfully handled the complete professional-grade typesetting, text formatting, and structural editing for the official 2026 commemorative book published for the Sanjanani Communication and Public Relations Festival.",
     photos: [
-      "/chathu-portfolio/highlights/highlight4_1.jpg",
-      "/chathu-portfolio/highlights/highlight4_2.jpg",
+      withBase("highlights/highlight4_1.jpg"),
+      withBase("highlights/highlight4_2.jpg"),
     ],
   },
   {
@@ -64,8 +67,8 @@ const highlights = [
     description:
       "Contributed creative scripts and spearheaded the official corporate PR, invitations workflow, and event logistics for the live launching ceremony.",
     photos: [
-      "/chathu-portfolio/highlights/highlight5_1.jpg",
-      "/chathu-portfolio/highlights/highlight5_2.jpg",
+      withBase("highlights/highlight5_1.jpg"),
+      withBase("highlights/highlight5_2.jpg"),
     ],
   },
   {
@@ -76,10 +79,10 @@ const highlights = [
     description:
       "Managed live campus radio operations, specializing in program packaging, scriptwriting, and comprehensive audio editing/splicing. Hosted the popular academic interview programs.",
     photos: [
-      "/chathu-portfolio/highlights/highlight6_1.jpg",
-      "/chathu-portfolio/highlights/highlight6_2.jpg",
-      "/chathu-portfolio/highlights/highlight6_3.jpg",
-      "/chathu-portfolio/highlights/highlight6_4.jpg",
+      withBase("highlights/highlight6_1.jpg"),
+      withBase("highlights/highlight6_2.jpg"),
+      withBase("highlights/highlight6_3.jpg"),
+      withBase("highlights/highlight6_4.jpg"),
     ],
   },
 ];
@@ -104,15 +107,16 @@ const cardVariants = {
 function HighlightCard({ item }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const hasMultiplePhotos = item.photos.length > 1;
 
   return (
     <motion.article className="highlight-card" variants={cardVariants}>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 3000 }}
-        loop={true}
+        navigation={hasMultiplePhotos}
+        pagination={hasMultiplePhotos ? { clickable: true } : false}
+        autoplay={hasMultiplePhotos ? { delay: 3000 } : false}
+        loop={hasMultiplePhotos}
         style={{ width: "100%", height: "auto", borderRadius: "8px" }}
       >
         {item.photos.map((photo, index) => (
