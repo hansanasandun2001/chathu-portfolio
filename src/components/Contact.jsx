@@ -33,7 +33,10 @@ function Contact() {
             <strong>Phone:</strong> <a href="tel:+94704072481">+94 70 407 2481</a>
           </p>
           <p>
-            <strong>Address:</strong> Kelaniya, Western Province, Sri Lanka
+            <strong>Permanent Address:</strong> Dankubura, Meehitiya, Malwala, Ratnapura
+          </p>
+           <p>
+            <strong>Location:</strong> Kelaniya, Western Province, Sri Lanka
           </p>
           <p>
             <strong>Email:</strong> <a href="mailto:cdeshanI904@gmail.com">cdeshanI904@gmail.com</a>
